@@ -3,7 +3,7 @@ import axios from 'axios';
 const baseURL =
     import.meta.env.MODE === 'development'
         ? 'http://localhost:8081/api'   
-        : 'http://backend.local/api';
+        : 'http://backend.local:8080/api';
 
 const axiosInstance = axios.create({
     baseURL,
