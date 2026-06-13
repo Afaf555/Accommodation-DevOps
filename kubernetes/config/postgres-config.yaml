@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: postgres-config
+  namespace: accommodation
+data:
+  POSTGRES_DB: lab1_emt
