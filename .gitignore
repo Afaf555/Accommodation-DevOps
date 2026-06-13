@@ -1,0 +1,6 @@
+.env
+lab_emt/.env
+**/target/
+**/node_modules/
+**/dist/
+.idea/
