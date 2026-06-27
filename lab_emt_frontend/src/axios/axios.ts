@@ -1,5 +1,4 @@
 import axios from 'axios';
-
 const baseURL =
     import.meta.env.MODE === 'development'
         ? 'http://localhost:8081/api'
@@ -22,7 +21,6 @@ axiosInstance.interceptors.request.use(
         return Promise.reject(error);
     }
 );
-
 axiosInstance.interceptors.response.use(
     (response) => response,
     (error) => {
@@ -35,5 +33,4 @@ axiosInstance.interceptors.response.use(
         return Promise.reject(error);
     }
 );
-
 export default axiosInstance;
