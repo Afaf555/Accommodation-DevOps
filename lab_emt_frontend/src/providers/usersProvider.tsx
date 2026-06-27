@@ -4,13 +4,13 @@ import userApi, { type UserUpdateRequest } from '../api/userApi';
 import type { User } from '../api/types/users';
 import UsersContext from '../contexts/usersContext';
 import useSnackbar from '../hooks/useSnackbar';
-
+import { useAuth } from '../contexts/AuthContext';
 const UsersProvider = ({ children }: { children: React.ReactNode }) => {
     const { showSnackbar } = useSnackbar();
 
     const [users, setUsers] = useState<User[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
-
+    const { isAuthenticated } = useAuth();
     const fetch = useCallback(async () => {
         setLoading(true);
 
@@ -47,8 +47,10 @@ const UsersProvider = ({ children }: { children: React.ReactNode }) => {
     }, [fetch, showSnackbar]);
 
     useEffect(() => {
-        void fetch();
-    }, [fetch]);
+        if (isAuthenticated) {
+            void fetch();
+        }
+    }, [fetch, isAuthenticated]);
 
     const value = useMemo(
         () => ({ users, loading, onEdit, onDelete }),

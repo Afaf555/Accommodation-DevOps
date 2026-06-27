@@ -24,16 +24,21 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     useEffect(() => {
         if (token) {
             try {
-                const payload = JSON.parse(atob(token.split('.')[1]));
+                const payload = JSON.parse(atob(token.split('.')[1] || "{}"));
                 setUser({
-                    username: payload.sub,
-                    role: payload.role || 'USER'
+                    username: payload.sub || '',
+                    role: payload.role || payload.authorities?.[0] || 'USER'
+
                 });
+                console.log("JWT PAYLOAD:", payload);
+
             } catch (error) {
                 console.error('Invalid token', error);
-                logout();
+                return
+
             }
         }
+
     }, [token]);
 
     const login = (newToken: string) => {

@@ -46,7 +46,7 @@ public class JwtWebSecurityConfig {
                         ).permitAll()
                         .requestMatchers("/api/user/login", "/api/user/register").permitAll()
 
-                        .requestMatchers(HttpMethod.GET, "/api/user", "/api/user/**").authenticated()
+                        .requestMatchers(HttpMethod.GET, "/api/user", "/api/user/**").hasRole("ADMIN")
 
                         .requestMatchers(HttpMethod.PUT, "/api/user/**").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.DELETE, "/api/user/**").hasRole("ADMIN")
